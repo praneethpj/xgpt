@@ -1,20 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin, googleLogout } from '@react-oauth/google';
- 
-// import shareVideo from '../assets/share.mp4' ;
-// import logo from '../assets/mejlis-logo.png' ;
-// import {client} from '../client';
-import { jwtDecode } from "jwt-decode";
-//import JWT from 'google-auth-library';
- 
-const Login = () => {
-   
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
 
-  const responseGoogle = async(response) => {
+const Login = () => {
+  const responseGoogle = async (response) => {
     localStorage.setItem('user', JSON.stringify(response));
     console.log(response);
-    const decoded = jwtDecode(response.credential)
+    const decoded = jwtDecode(response.credential);
     const { sub, name, picture } = decoded;
     const doc = {
       _id: sub,
@@ -24,38 +19,58 @@ const Login = () => {
     };
     localStorage.setItem('userName', name);
     localStorage.setItem('picture', picture);
-   window.location.reload();
-    // client.createIfNotExists(doc).then(() => {
-    
-    // });
+    window.location.reload();
   };
-  
-  return (
-    <div className='flex justify-start items-center flex-col h-screen'>
-      <div className='relativr w-full h-full'>
-        {/* <video src ={shareVideo} type ='video/mp4'
-        loop
-        controls={false}
-        muted
-        autoPlay
-        className='w-full h-full object-cover' /> */}
-      </div>
-      <div className='absolute flex flex-col justify-center items-center top-0 right- left-0 bottom-0 bg-blackOverlay'>
-        <div className='p=5'>
-          {/* <img  src={logo} width="130px" alt='logo'/> */}
-        </div>
-        <div className='shadow-2x1'>
-          <GoogleOAuthProvider
-          clientId="700864335372-7mdeqro3n29nphr7j7q844246doinksm.apps.googleusercontent.com">
-            <GoogleLogin
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy = 'single_host_origin' />
-          </GoogleOAuthProvider>
 
-        </div>
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="relative w-full h-full">
+        {/* Your background content goes here */}
       </div>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0 bg-blackOverlay"
+      >
+        <div className="p-5">
+        <TypeAnimation
+      sequence={[
+  
+        'Let\'s experience the xGPT',
+        1000, 
+        'AI-based Text Manipulations',
+        1000,
+        'Freemium to use',
+        1000,
+        'Let\'s get started within 2 seconds',
+        1000
+      ]}
+      wrapper="span"
+      speed={50}
+      style={{ fontSize: '2em', display: 'inline-block' }}
+      repeat={Infinity}
+    />
+        </div>
+        <motion.div
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="shadow-2xl p-4"
+        >
+          <GoogleOAuthProvider
+            clientId="700864335372-7mdeqro3n29nphr7j7q844246doinksm.apps.googleusercontent.com"
+          >
+            <GoogleLogin
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy="single_host_origin"
+            />
+          </GoogleOAuthProvider>
+        </motion.div>
+      </motion.div>
     </div>
-  )
-}
-export default Login
+  );
+};
+
+export default Login;

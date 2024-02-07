@@ -16,13 +16,13 @@ const Chat = () => {
   const fetchData = async () => {
   
     try {
-      const response = await fetch('http://localhost:5000/api/v1/user/getAllChat', {
+      const response = await fetch('https://x-gpt-backend.onrender.com/api/v1/user/getAllChat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: 'Praneeth PJ',
+          username:  localStorage.getItem('userName'),
         }),
       });
 
@@ -47,7 +47,7 @@ const Chat = () => {
  
 
   useEffect(() => {
-    const ws = new WebSocket( process.env.WEB_SOCKET_URL || "ws://localhost:5000");
+    const ws = new WebSocket( process.env.WEB_SOCKET_URL || "ws://x-gpt-backend.onrender.com:5000");
 
     ws.onopen = () => {
       console.log('WebSocket connection opened');
@@ -96,7 +96,7 @@ const Chat = () => {
     console.log("Chat ID ss : " + chatId);
     try {
       
-      const response = await fetch('http://localhost:5000/api/v1/user/getAllChat', {
+      const response = await fetch('https://x-gpt-backend.onrender.com/api/v1/user/getAllChat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

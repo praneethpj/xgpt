@@ -28,6 +28,7 @@ const ChatInput = ({ onSendMessage }) => {
             src={`${image}`}
             style={{ width: '50px', height: '50px', borderRadius: '50%' }}
             alt={`${username}'s avatar`}
+            referrerpolicy="no-referrer"
           />
 
         </div>
