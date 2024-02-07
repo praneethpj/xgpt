@@ -47,7 +47,7 @@ const Chat = () => {
  
 
   useEffect(() => {
-    const ws = new WebSocket( process.env.WEB_SOCKET_URL || "ws://x-gpt-backend.onrender.com:5000");
+    const ws = new WebSocket( process.env.WEB_SOCKET_URL || "ws://x-gpt-backend.onrender.com");
 
     ws.onopen = () => {
       console.log('WebSocket connection opened');
